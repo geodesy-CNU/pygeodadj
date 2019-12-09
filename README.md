@@ -1,5 +1,5 @@
 # pygeodadj
-Python Geodesy Adjustment project
+## Python Geodesy Adjustment project
 <hr>
 Author: Dr. Ming-Jer Huang (Daniel Huang) <br>
 email: geodesy.cnu@gmail.com
