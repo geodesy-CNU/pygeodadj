@@ -1,7 +1,7 @@
 # pygeodadj
 Python Geodesy Adjustment project
 
-Author: Dr. Ming-Jer Huang (Daniel Huang)
+Author: Dr. Ming-Jer Huang (Daniel Huang) <br>
 email: geodesy.cnu@gmail.com
 
 This work is based on the text book of Adjusment Computations-Spatial Data Analysis-5ed (Charles D. Ghiliani).
