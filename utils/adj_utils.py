@@ -59,55 +59,58 @@ def azdis(xa,ya,xb,yb):
 
 # 極座標法定位計算核心
 def azdis_compute(x0,y0,az0,dd,dist):
-    az=az0+dd
-    if (az>360):
-        z=az-360
+	az=az0+dd
+	if (az>360.0):
+		z=az-360.0
 
-    az=az*pi/180
-    dx=dist*math.sin(az)
-    dy=dist*math.cos(az)
-    xp=x0+dx
-    yp=y0+dy
-    return xp,yp
+	az=az*pi/180.0
+	dx=dist*math.sin(az)
+	dy=dist*math.cos(az)
+	xp=x0+dx
+	yp=y0+dy
+	
+	return xp,yp
 
 
 # 讀取觀測檔案
 def azdis_pos_df(path):
-    # 讀取控制點
-    #data_dir='drive/My Drive/Colab Notebooks/Courses/adjustment/'
-    #df=pd.read_csv(data_dir+'azdis_pos_cnu.txt',header=0)
-    df=pd.read_csv(path,header=0)
+	# 讀取控制點
+	#data_dir='drive/My Drive/Colab Notebooks/Courses/adjustment/'
+	#df=pd.read_csv(data_dir+'azdis_pos_cnu.txt',header=0)
+	df=pd.read_csv(path,header=0)
 
-    # 觀測點 (CNU DG:02) TWD97
-    xa=df.loc[0,'xp']
-    ya=df.loc[0,'yp']
+	# 觀測點 (CNU DG:02) TWD97
+	xa=df.loc[0,'xp']
+	ya=df.loc[0,'yp']
 
-    # 參考原方向 (CNU: GD52)
-    xb=df.loc[1,'xp']
-    yb=df.loc[1,'yp']
+	# 參考原方向 (CNU: GD52)
+	xb=df.loc[1,'xp']
+	yb=df.loc[1,'yp']
 
-    # 呼叫計算方位角距離程式
-    deg,mm,sec,dis=azdis(xa,ya,xb,yb)
-    az0=dms2d(deg,mm,sec)
-    df.loc[1,'deg']=deg
-    df.loc[1,'min']=mm
-    df.loc[1,'sec']=sec
-    df.loc[1,'dist']=dis
+	# 呼叫計算方位角距離程式
+	deg,mm,sec,dis=azdis(xa,ya,xb,yb)
+	az0=dms2d(deg,mm,sec)
+	df.loc[1,'deg']=deg
+	df.loc[1,'min']=mm
+	df.loc[1,'sec']=sec
+	df.loc[1,'dist']=dis
 
-    # 點位計算
-    for index in range(2,df.shape[0]):
-        pt_name=df.loc[index,'PtName']
-        dd=df.loc[index,'deg']
-        mm=df.loc[index,'min']
-        ss=df.loc[index,'sec']
-        dist=df.loc[index,'dist']
-        dd=dms2d(dd,mm,ss)
+	# 點位計算
+	#print(df.shape[0])
+	for index in range(2,df.shape[0]):
+		pt_name=df.loc[index,'PtName']
+		dd=df.loc[index,'deg']
+		mm=df.loc[index,'min']
+		ss=df.loc[index,'sec']
+		dist=df.loc[index,'dist']
+		dd=dms2d(dd,mm,ss)
 
-    xp,yp=azdis_compute(xa,ya,az0,dd,dist)
-    df.loc[index,'xp']=xp
-    df.loc[index,'yp']=yp
+		xp,yp=azdis_compute(xa,ya,az0,dd,dist)
+		#print(xp,yp)
+		df.loc[index,'xp']=xp
+		df.loc[index,'yp']=yp
 
-    return df
+	return df
 
 # 方位角距離計算繪圖
 def plot_azdis(xa,ya,xb,yb,dd,mm,ss,dis):
