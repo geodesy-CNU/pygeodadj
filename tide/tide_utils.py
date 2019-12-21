@@ -39,7 +39,7 @@ def plot_obs(water_level,Station_Name):
 	ax = water_level.plot(figsize=(13, 3.5),title=Station_Name)
 	ret=ax.set(ylabel='Height (m)')
 
-def plot_analysis(out,water_level,):	
+def plot_analysis(out,water_level,Station_Name):	
 	register_matplotlib_converters()
 
 	Z0=out['z0']
