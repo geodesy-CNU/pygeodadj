@@ -33,7 +33,7 @@ class GNSS_net:
     #self.__GNSS_design_matrix()
     
     def __init__(self):
-		self._ProjectName='[Empty GNSS Net Project]'
+		self._ProjectName=' '
 		self._num_control_pts = 0
 		self._num_obs_pts = 0
 		self._num_obs_baselines = 0
