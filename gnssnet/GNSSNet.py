@@ -33,20 +33,20 @@ class GNSS_net:
     #self.__GNSS_design_matrix()
     
     def __init__(self):
-		self._ProjectName=' '
-		self._num_control_pts = 0
-		self._num_obs_pts = 0
-		self._num_obs_baselines = 0
-		self._ctrl_pts = []
-		self._obs_pts = []
-		self._pts = []
-		self._Xp = []
-		self._baselines = []
-		self._pts_name = []
-		self._A=np.zeros([1,1])
-		self._L=np.zeros([1,1])
-		self._P=np.zeros([1,1])
-		self._sigma0=0
+        self._ProjectName='[Empty GNSS Net Project]'
+        self._num_control_pts = 0
+        self._num_obs_pts = 0
+        self._num_obs_baselines = 0
+        self._ctrl_pts=[]
+        self._obs_pts=[]
+        self._pts=[]
+        self._baselines=[]
+        self._pts_name=[]
+        self._A=np.zeros([1,1])
+        self._L=np.zeros([1,1])
+        self._P=np.zeros([1,1])
+        self._sigma0=0
+        
     
     def GNSS_read_Adat(self, path, sigma0, ComputeObs=False):
         self.__read_Adat(path, sigma0, ComputeObs)
@@ -62,14 +62,12 @@ class GNSS_net:
         m = self._num_obs_pts*3
         n = self._num_obs_baselines*3
         k = self._num_control_pts + self._num_obs_pts
-		
         #print(m,n,k)
 
         self._A=np.zeros([n,m])
         self._L=np.zeros([n,1])
         self._P=np.zeros([n,n])
-		self._Xp=np.zeros([k,3])
-		
+
         id=0
         for i in range(0,n,3):
             sigma=self._baselines[id][7] 
@@ -240,7 +238,6 @@ class GNSS_net:
 
         print('\n控制點數: %d'%(self._num_control_pts))
         print('\n控制點座標')
-		
         for i in range(self._num_control_pts):
             ctrl=self._ctrl_pts[i]
             print('%d %s\t%14.5f\t%14.5f\t%14.5f'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
@@ -271,9 +268,6 @@ class GNSS_net:
         for i in range(self._num_control_pts):
             ctrl=self._ctrl_pts[i]
             print('%d %s %14.5f %14.5f %14.5f'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
-			self._Xp[i,0]=ctrl[2]
-			self._Xp[i,1]=ctrl[3]
-			self._Xp[i,2]=ctrl[4]
 
         id=0    
         for i in range(0,self._num_obs_pts*3,3):
@@ -281,9 +275,6 @@ class GNSS_net:
             print('%d %s %14.5f %14.5f %14.5f %6.5f %6.5f %6.5f'
                   %(obs[0],obs[1],obs[2]+X[i],obs[3]+X[i+1],obs[4]+X[i+2],
                     sX[i],sX[i+1],sX[i+2]))
-			self._Xp[id+self._num_control_pts,0]=obs[2]+X[i]
-			self._Xp[id+self._num_control_pts,1]=obs[3]+X[i+1]
-			self._Xp[id+self._num_control_pts,2]=obs[4]+X[i+2]					
             id+=1
         print('\n基線平差結果與精度分析')
         id=0    
@@ -344,10 +335,6 @@ class GNSS_net:
     @property
     def obs_pts(self):
         return self._obs_pts
-		
-	@property
-    def Xp(self):
-        return self._Xp
  
     @property
     def sigma0(self):
