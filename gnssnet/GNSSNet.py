@@ -47,7 +47,6 @@ class GNSS_net:
         self._P=np.zeros([1,1])
         self._sigma0=0
 		self._Xp=[]
-        
     
     def GNSS_read_Adat(self, path, sigma0, ComputeObs=False):
         self.__read_Adat(path, sigma0, ComputeObs)
