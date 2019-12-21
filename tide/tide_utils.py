@@ -61,7 +61,7 @@ def plot_analysis(out,water_level,Station_Name):
 
 	plt.subplot(3,1,3)
 	res=out['xres']-Z0
-	plt.plot(res, alpha=0.5, label=u'Residue')
+	plt.plot(res[:n], alpha=0.5, label=u'Residue')
 	plt.legend(numpoints=1, loc='lower right')
 	plt.ylim([-0.5,0.5]);
 
