@@ -98,6 +98,8 @@ def GNSS_Report(wolf_gnss_net, A,L, X, V, sigma0, DX, sL, P, N, U):
     
     print('\n控制點數: %d'%(wolf_gnss_net.num_control_pts))
     print('\n控制點座標')
+	
+	Xp=np.zeros([wolf_gnss_net.num_control_pts+wolf_gnss_net.num_obs_pts,3])
     for i in range(wolf_gnss_net.num_control_pts):
         ctrl=wolf_gnss_net.ctrl_pts[i]
         print('%d %s\t%14.5f\t%14.5f\t%14.5f'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
@@ -128,6 +130,9 @@ def GNSS_Report(wolf_gnss_net, A,L, X, V, sigma0, DX, sL, P, N, U):
     for i in range(wolf_gnss_net.num_control_pts):
         ctrl=wolf_gnss_net.ctrl_pts[i]
         print('%d %s %14.5f %14.5f %14.5f'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
+		Xp[i,0]=ctrl[2]
+		Xp[i,1]=ctrl[3]
+		Xp[i,2]=ctrl[4]
     
     id=0    
     for i in range(0,wolf_gnss_net.num_obs_pts*3,3):
@@ -135,6 +140,9 @@ def GNSS_Report(wolf_gnss_net, A,L, X, V, sigma0, DX, sL, P, N, U):
         print('%d %s %14.5f %14.5f %14.5f %6.5f %6.5f %6.5f'
               %(obs[0],obs[1],obs[2]+X[i],obs[3]+X[i+1],obs[4]+X[i+2],
                 sX[i],sX[i+1],sX[i+2]))
+		Xp[id+wolf_gnss_net.num_control_pts,0]=obs[2]+X[i]
+		Xp[id+wolf_gnss_net.num_control_pts,1]=obs[3]+X[i+1]
+		Xp[id+wolf_gnss_net.num_control_pts,2]=obs[4]+X[i+2]
         id+=1
     print('\n基線平差結果與精度分析')
     id=0    
@@ -151,3 +159,5 @@ def GNSS_Report(wolf_gnss_net, A,L, X, V, sigma0, DX, sL, P, N, U):
     Matrix_print(U,'法方程式 U矩陣')
     Matrix_print(X,'未知數X')
     Matrix_print(V,'誤差矩陣V')
+	
+	
