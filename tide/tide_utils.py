@@ -39,10 +39,9 @@ def plot_obs(water_level,Station_Name):
 	ax = water_level.plot(figsize=(13, 3.5),title=Station_Name)
 	ret=ax.set(ylabel='Height (m)')
 
-def plot_analysis(out,water_level,Station_Name):	
+def plot_analysis(xout,water_level,Station_Name):	
 	register_matplotlib_converters()
 
-	Z0=out['z0']
 	plt.figure(figsize=[18,10])
 
 	plt.subplot(3,1,1)
@@ -53,8 +52,9 @@ def plot_analysis(out,water_level,Station_Name):
 	plt.title(Station_Name)
 
 	plt.subplot(3,1,2)
-	xout=out['xout']+Z0
-	plt.plot(xout, alpha=0.5, label=u'Prediction')
+	#xout=out['xout']+Z0
+	n=len(water_level)
+	plt.plot(xout[:n], alpha=0.5, label=u'Prediction')
 	plt.legend(numpoints=1, loc='lower right')
 	plt.ylim([-1,3])
 
