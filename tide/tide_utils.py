@@ -57,12 +57,23 @@ def plot_analysis(out,water_level,Station_Name,datum):
 	xout=out['xout']+Z0
 	n=len(water_level)
 	plt.plot(xout[:n], alpha=0.5, label='Prediction')
-	
+	plt.legend(numpoints=1, loc='lower right')
+		
 	DL=datum['DL']
 	xline=[0,n]
 	yline=[DL,DL]
 	plt.plot(xline,yline,'r')
-	plt.legend(numpoints=1, loc='lower right')
+	
+	SR=datum['SR']
+	xline=[0,n]
+	yline=[SR,SR]
+	plt.plot(xline,yline,'g')
+	
+	NR=datum['NR']
+	xline=[0,n]
+	yline=[NR,NR]
+	plt.plot(xline,yline,'b')
+	
 	plt.ylim([-1,3])
 
 	plt.subplot(3,1,3)
