@@ -40,7 +40,7 @@ def plot_obs(water_level,Station_Name):
 	ax = water_level.plot(figsize=(13, 3.5),title=Station_Name)
 	ret=ax.set(ylabel='Height (m)')
 
-def plot_analysis(out,water_level,Station_Name):	
+def plot_analysis(out,water_level,Station_Name,datum):	
 	register_matplotlib_converters()
 
 	Z0=out['z0']
@@ -48,7 +48,7 @@ def plot_analysis(out,water_level,Station_Name):
 
 	plt.subplot(3,1,1)
 	#water_level = df[' Water Level'][start_date:]
-	plt.plot(water_level, label=u'Observations')
+	plt.plot(water_level, label='Observations')
 	plt.legend(numpoints=1, loc='lower right')
 	plt.ylim([-1,3])
 	plt.title(Station_Name)
@@ -56,15 +56,23 @@ def plot_analysis(out,water_level,Station_Name):
 	plt.subplot(3,1,2)
 	xout=out['xout']+Z0
 	n=len(water_level)
-	plt.plot(xout[:n], alpha=0.5, label=u'Prediction')
+	plt.plot(xout[:n], alpha=0.5, label='Prediction')
+	
+	DL=datum['DL']
+	xline=[0,n]
+	yline=[DL,DL]
+	plt.plot(xline,yline,'r')
 	plt.legend(numpoints=1, loc='lower right')
 	plt.ylim([-1,3])
 
 	plt.subplot(3,1,3)
 	res=out['xres']-Z0
-	plt.plot(res[:n], alpha=0.5, label=u'Residue')
+	plt.plot(res[:n], alpha=0.5, label='Residue')
 	plt.legend(numpoints=1, loc='lower right')
-	plt.ylim([-0.5,0.5]);
+	ret=plt.ylim([-0.5,0.5])
+	
+	return
+	
 
 def get_datum(out):
 #  計算潮汐基準面
