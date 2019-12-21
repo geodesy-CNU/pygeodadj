@@ -33,20 +33,20 @@ class GNSS_net:
     #self.__GNSS_design_matrix()
     
     def __init__(self):
-        self._ProjectName='[Empty GNSS Net Project]'
-        self._num_control_pts = 0
-        self._num_obs_pts = 0
-        self._num_obs_baselines = 0
-        self._ctrl_pts=[]
-        self._obs_pts=[]
-        self._pts=[]
-        self._baselines=[]
-        self._pts_name=[]
-        self._A=np.zeros([1,1])
-        self._L=np.zeros([1,1])
-        self._P=np.zeros([1,1])
-        self._sigma0=0
+		self._ProjectName='[Empty GNSS Net Project]'
+		self._num_control_pts = 0
+		self._num_obs_pts = 0
+		self._num_obs_baselines = 0
+		self._ctrl_pts=[]
+		self._obs_pts=[]
+		self._pts=[]
 		self._Xp=[]
+		self._baselines=[]
+		self._pts_name=[]
+		self._A=np.zeros([1,1])
+		self._L=np.zeros([1,1])
+		self._P=np.zeros([1,1])
+		self._sigma0=0
     
     def GNSS_read_Adat(self, path, sigma0, ComputeObs=False):
         self.__read_Adat(path, sigma0, ComputeObs)
