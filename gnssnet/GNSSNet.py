@@ -267,12 +267,12 @@ class GNSS_net:
         print('\n控制點及觀測點座標')
         for i in range(self._num_control_pts):
             ctrl=self._ctrl_pts[i]
-            print('%d %s %14.5f %14.5f %14.5f'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
+            print('%d,%s,%14.5f,%14.5f,%14.5f,0,0,0'%(ctrl[0],ctrl[1],ctrl[2],ctrl[3],ctrl[4]))
 
         id=0    
         for i in range(0,self._num_obs_pts*3,3):
             obs=self._obs_pts[id]
-            print('%d %s %14.5f %14.5f %14.5f %6.5f %6.5f %6.5f'
+            print('%d,%s,%14.5f,%14.5f,%14.5f,%6.5f,%6.5f,%6.5f'
                   %(obs[0],obs[1],obs[2]+X[i],obs[3]+X[i+1],obs[4]+X[i+2],
                     sX[i],sX[i+1],sX[i+2]))
             id+=1
