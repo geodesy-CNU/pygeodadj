@@ -68,14 +68,14 @@ def plot_analysis(out,water_level,Station_Name,datum,dl_shift=-1.0):
 	
 	SR=datum['SR']
 	xline=[0,n]
-	yline=[SR,SR]
+	yline=[Z0,Z0]
 	plt.plot(xline,yline,'g',alpha=0.5)
 	
 	NR=datum['NR']
 	xline=[0,n]
-	yline=[NR,NR]
+	yline=[SR,SR]
 	plt.plot(xline,yline,'b',alpha=0.5)
-	plt.legend(['DL','SR','NR'],loc='upper left')
+	plt.legend(['DL','Z0','SR'],loc='upper left')
 	plt.ylim([dl_shift,3])
 
 	plt.subplot(3,1,3)
