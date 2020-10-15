@@ -40,7 +40,7 @@ def plot_obs(water_level,Station_Name):
 	ax = water_level.plot(figsize=(13, 3.5),title=Station_Name)
 	ret=ax.set(ylabel='Height (m)')
 
-def plot_analysis(out,water_level,Station_Name,datum):	
+def plot_analysis(out,water_level,Station_Name,datum,dl_shift=-1.0):	
 	register_matplotlib_converters()
 
 	Z0=out['z0']
@@ -76,13 +76,13 @@ def plot_analysis(out,water_level,Station_Name,datum):
 	yline=[NR,NR]
 	plt.plot(xline,yline,'b',alpha=0.5)
 	plt.legend(['DL','SR','NR'],loc='upper left')
-	plt.ylim([-1,3])
+	plt.ylim([dl_shift,3])
 
 	plt.subplot(3,1,3)
 	res=out['xres']-Z0
 	plt.plot(res[:n], alpha=0.5, label='Residue')
 	plt.legend(numpoints=1, loc='lower right')
-	ret=plt.ylim([-0.5,0.5])
+	ret=plt.ylim([-1.0,1.0])
 	
 	return
 	
