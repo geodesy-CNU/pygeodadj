@@ -50,7 +50,7 @@ def plot_analysis(out,water_level,Station_Name,datum,dl_shift=-1.0):
 	#water_level = df[' Water Level'][start_date:]
 	plt.plot(water_level, label='Observations')
 	plt.legend(numpoints=1, loc='lower right')
-	plt.ylim([-1,3])
+	plt.ylim([dl_shift,3])
 	plt.title(Station_Name)
 
 	plt.subplot(3,1,2)
