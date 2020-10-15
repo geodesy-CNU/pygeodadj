@@ -14,5 +14,6 @@ The pygeodadj python package include but not limit to the following topics and w
 - Adjustment of Horizontal Surveys: Trilateration
 - Adjustment of Horizontal Surveys: Triangulation
 - GNSS Net Adjustment
+- Tide Datum Analysis
 
 This work will cover some major technologies in the field geo-spatial information including GIS, GNSS, and remote sensing.
